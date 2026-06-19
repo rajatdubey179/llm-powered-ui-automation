@@ -32,7 +32,7 @@ def test_empty_credentials(page):
     assert login_page.has_error_message() or page.url.__contains__("login"), \
         "Expected to stay on login page with empty credentials"
 
-
+#Login Page Test case
 def test_logout(page, config):
     login_page = LoginPage(page)
     login_page.navigate()
