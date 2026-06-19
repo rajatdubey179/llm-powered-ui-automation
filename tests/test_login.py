@@ -24,7 +24,7 @@ def test_invalid_email(page):
     login_page.login("notauser@fake.com", "somepassword")
     assert login_page.has_error_message(), "Expected error for unregistered email"
 
-
+#ABC
 def test_empty_credentials(page):
     login_page = LoginPage(page)
     login_page.navigate()
