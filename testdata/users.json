@@ -1,0 +1,14 @@
+{
+  "staging": {
+    "username": "user@phptravels.com",
+    "password": "demouser"
+  },
+  "admin": {
+    "username": "admin@phptravels.com",
+    "password": "demoadmin"
+  },
+  "local": {
+    "username": "user@phptravels.com",
+    "password": "demouser"
+  }
+}
