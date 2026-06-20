@@ -1,6 +1,7 @@
 import sys
 import os
 import pytest
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -51,6 +52,17 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
     if report.failed and "page" in item.funcargs:
         page = item.funcargs["page"]
+
+        # Capture screenshot on failure for debugging
         screenshot_path = f"reports/{item.nodeid.replace('/', '_').replace('::', '_')}.png"
         page.screenshot(path=screenshot_path)
         logger.error(f"Test failed — screenshot saved: {screenshot_path}")
+
+        # Persist error log so llm_runner.py can analyze it
+        error_log = str(report.longrepr)
+        error_file = "reports/last_failure.txt"
+        os.makedirs("reports", exist_ok=True)
+        with open(error_file, "w") as f:
+            f.write(f"Test: {item.nodeid}\n\n")
+            f.write(error_log)
+        logger.error(f"Error log saved: {error_file}")

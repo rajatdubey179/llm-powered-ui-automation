@@ -4,7 +4,7 @@ import ollama
 
 class LLMHelper:
     def __init__(self):
-        self.model = os.getenv("OLLAMA_MODEL", "llama3")
+        self.model = os.getenv("OLLAMA_MODEL", "qwen3:4b")
         self.host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
         self.client = ollama.Client(host=self.host)
 

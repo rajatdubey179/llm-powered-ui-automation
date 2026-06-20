@@ -4,10 +4,8 @@ from playwright.sync_api import Page
 class FlightsPage:
     def __init__(self, page: Page):
         self.page = page
-        # trip type buttons
         self.one_way_btn = page.get_by_role("button", name="trending_flat One Way")
         self.round_trip_btn = page.get_by_role("button", name="sync_alt Round Trip")
-        # search inputs (inside flights tabpanel)
         self.origin_input = page.get_by_role("textbox", name="Departure From")
         self.destination_input = page.get_by_role("textbox", name="Arrival To")
         self.depart_date_input = page.get_by_role("textbox", name="Departure Date")
