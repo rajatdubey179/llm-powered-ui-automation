@@ -1,10 +1,13 @@
 import os
 import ollama
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class LLMHelper:
     def __init__(self):
-        self.model = os.getenv("OLLAMA_MODEL", "qwen3:4b")
+        self.model = os.getenv("OLLAMA_MODEL")
         self.host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
         self.client = ollama.Client(host=self.host)
 

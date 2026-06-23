@@ -18,9 +18,12 @@ def config():
 
 def _dismiss_demo_modal(page):
     modal = page.locator("#demoWarningModal")
-    if modal.is_visible():
+    try:
+        modal.wait_for(state="visible", timeout=3000)
         page.get_by_role("button", name="I Understand & Continue").click()
-        modal.wait_for(state="hidden")
+        modal.wait_for(state="hidden", timeout=3000)
+    except Exception:
+        pass
 
 
 @pytest.fixture(autouse=True)

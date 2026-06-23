@@ -11,16 +11,26 @@ class HotelsPage:
         self.hotel_cards = page.locator(".hotel-item, .property-card, [class*='hotel-card']")
         self.hotel_names = page.locator(".hotel-name, .property-name, h3")
 
+    def _dismiss_modal(self):
+        modal = self.page.locator("#demoWarningModal")
+        try:
+            modal.wait_for(state="visible", timeout=3000)
+            self.page.get_by_role("button", name="I Understand & Continue").click()
+            modal.wait_for(state="hidden", timeout=3000)
+        except Exception:
+            pass
+
     def open(self):
         self.page.goto("/#stays")
         self.page.wait_for_load_state("networkidle")
+        self._dismiss_modal()
         self.page.locator('[role=tab]:has-text("Stays")').click()
 
     def search(self, destination: str, checkin: str, checkout: str):
         self.destination_input.click()
         self.destination_input.fill(destination)
-        self.page.wait_for_timeout(1200)
-        self.page.locator(f'li:has-text("{destination}"), .autocomplete-item:has-text("{destination}")').first.click()
+        self.page.wait_for_timeout(1500)
+        self.page.locator(f'.cursor-pointer:has-text("{destination}")').first.click()
 
         self.checkin_input.click()
         self.checkin_input.fill(checkin)
